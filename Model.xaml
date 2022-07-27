@@ -1,0 +1,894 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2010"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ICOP_3"
+        xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:d1="http://schemas.microsoft.com/expression/blend/2008"
+        x:Class="ICOP_3.Model"
+        mc:Ignorable="d d1"
+        
+        Title="Model" Height="1050" Width="1920" Closing="Window_Closing" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Datagrid/VTM_StyleDictionary.xaml">
+                </ResourceDictionary>
+
+            </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate x:Key="flatButton" TargetType="Button">
+                <Border x:Name="border" CornerRadius="5" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0">
+                    <ContentPresenter x:Name="contentPresenter"
+                              ContentTemplate="{Binding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Cursor="Hand"
+                              ContentStringFormat="{Binding ContentStringFormat}"></ContentPresenter>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="BorderThickness" TargetName="border" Value="4"/>
+
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+
+            <ControlTemplate x:Key="flatTogleButtonn" TargetType="ToggleButton">
+                <Border x:Name="border" CornerRadius="5" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0">
+                    <ContentPresenter x:Name="contentPresenter"
+                              ContentTemplate="{Binding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Cursor="Hand"
+                              ContentStringFormat="{Binding ContentStringFormat}"></ContentPresenter>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="BorderThickness" TargetName="border" Value="5"/>
+                    </Trigger>
+
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+        </ResourceDictionary>
+
+
+
+
+
+
+    </Window.Resources>
+
+
+
+
+
+
+
+    <Grid>
+        <Grid Height="1020" Width="1920" Background="#FF0D001D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="Camera1_Image" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="fill" Source="image/picture.jpg"/>
+
+            <Canvas x:Name="Camera1_Canvas" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"  Background="#01000000" MouseDown="DrawingCanvas_MouseDown" KeyDown="Camera1_Canvas_KeyDown" MouseMove="DrawingCanvas_MouseMove" MouseUp="DrawingCanvas_MouseUp" PreviewKeyDown="Image1_Canvas_PreviewKeyDown"  MouseRightButtonDown="Camera1_Canvas_MouseRightButtonDown"  />
+            <!--<Canvas x:Name="Camera2_Canvas" Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="1"  Background="#01000000" MouseDown="DrawingCanvas_MouseDown" MouseMove="DrawingCanvas_MouseMove" MouseUp="DrawingCanvas_MouseUp"/>
+            <Canvas x:Name="Camera3_Canvas" Grid.Column="0" Grid.Row="2" Grid.RowSpan="1" Grid.ColumnSpan="1"  Background="#01000000" MouseDown="DrawingCanvas_MouseDown" MouseMove="DrawingCanvas_MouseMove" MouseUp="DrawingCanvas_MouseUp"/>
+            <Canvas x:Name="Camera4_Canvas" Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Grid.ColumnSpan="1"  Background="#01000000" MouseDown="DrawingCanvas_MouseDown" MouseMove="DrawingCanvas_MouseMove" MouseUp="DrawingCanvas_MouseUp"/>-->
+            <Grid Grid.ColumnSpan="2" Margin="0,0,0,0" Background="#B2000000"  >
+
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="27*"/>
+                    <ColumnDefinition Width="227*"/>
+                    <ColumnDefinition Width="233*"/>
+                    <ColumnDefinition Width="233*"/>
+                </Grid.ColumnDefinitions>
+                <Button  BorderThickness="0" Background="{x:Null}" Template="{StaticResource flatButton}"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ToolTip="Save curent model" Click="bt_SAVE_Click" Margin="5,5,0,5">
+                    <Border BorderThickness="2" CornerRadius="5" Grid.Column="3" Grid.Row="12"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  BorderBrush="#FF008BFF" Background="#0013D2FD">
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="image/diskette.png" Margin="25,6,27,5" />
+                    </Border>
+                </Button>
+
+                <Button x:Name="bt_LoadImage" Click="bt_LoadImage_Click" Template="{StaticResource flatButton}"  BorderThickness="0" Background="{x:Null}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Grid.Column="1" ToolTip="Get image from PC" Margin="5,5,0,5">
+                    <Border BorderThickness="2" CornerRadius="5" Grid.Column="3" Grid.Row="12" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  BorderBrush="#FF008BFF"  Background="#0007212C">
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="image/upload.png" Margin="28,6,23,0"  />
+                    </Border>
+                </Button>
+
+                <!--<ToggleButton x:Name="btOpenModel" Margin="5,0,0,0"  BorderThickness="0" Background="{x:Null}"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Grid.Column="5" Height="52" ToolTip="Get model from PC" Click="btOpenModel_Click">
+                    <Border BorderThickness="1" CornerRadius="5" Grid.Column="3" Grid.Row="12" BorderBrush="Black" Width="58">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF020610" Offset="0.059"/>
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="#FF204398" Offset="0.441"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="/modules.png" Margin="5"/>
+                    </Border>
+                </ToggleButton>-->
+
+                <!--<ToggleButton  BorderThickness="0" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Grid.Column="6" Height="52" ToolTip="Move Test ">
+                    <Border BorderThickness="1" CornerRadius="5" Grid.Column="3" Grid.Row="12" BorderBrush="Black" Width="58" Height="48">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF020610" Offset="0.059"/>
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="#FF204398" Offset="0.441"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="image/move.png" Height="41"/>
+                    </Border>
+                </ToggleButton>-->
+
+                <!--<ToggleButton  BorderThickness="0" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Grid.Column="1" Height="52" ToolTip="Take photo"  >
+                    <Border BorderThickness="1" CornerRadius="5" Grid.Column="3" Grid.Row="12" BorderBrush="Black" Width="58">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF020610" Offset="0.059"/>
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="#FF204398" Offset="0.441"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="image/diaphragm.png" Margin="5"/>
+                    </Border>
+                </ToggleButton>-->
+
+                <Button x:Name="Modell"  BorderThickness="0" Background="{x:Null}" Template="{StaticResource flatButton}"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"   Grid.Column="2"  ToolTip=" Open details of model " Click="Modell_Click" Margin="5,5,0,5">
+                    <Border BorderThickness="2" CornerRadius="5" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Grid.Row="12" BorderBrush="#FF008BFF" Background="#0007212C">
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="image/list (2).png" Margin="5"/>
+                    </Border>
+                </Button>
+
+                <Button x:Name="tgbDrawNewTest"  BorderThickness="0" Background="{x:Null}" Template="{StaticResource flatButton}"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Height="52" ToolTip="Draw new test" Click="tgbDrawNewTest_Click" Margin="22,4,26,4" Visibility="Hidden" Width="52">
+                    <Border BorderThickness="1" CornerRadius="5" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Grid.Row="12" BorderBrush="Black">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF020610" Offset="0.059"/>
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="#FF204398" Offset="0.441"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Source="image/big-paint-brush.png" Margin="5"/>
+                    </Border>
+                </Button>
+
+                <!--<ToggleButton x:Name="bt_Options" BorderThickness="0" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Grid.Column="4" Height="52" ToolTip="Options" Checked="bt_Options_Checked" >
+                    <Border BorderThickness="1" CornerRadius="5" Grid.Column="3" Grid.Row="12" BorderBrush="Black" Width="58">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF020610" Offset="0.059"/>
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="#FF204398" Offset="0.441"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="10,5,5,5" Source="image/options.png"/>
+                    </Border>
+                </ToggleButton>-->
+
+                <Button x:Name="btAddProjectandModel" BorderThickness="0" Background="{x:Null}" Template="{StaticResource flatButton}"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="3"  ToolTip="Add new project" Click="btAddProjectandModel_Click" Margin="5,5,0,5" >
+                    <Border BorderThickness="2" CornerRadius="5" Grid.Column="3" Grid.Row="12" BorderBrush="#FF008BFF"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0007212C">
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="10,5,5,5" Source="image/rectangular (1).png"/>
+                    </Border>
+                </Button>
+
+
+
+                <Button x:Name="btAddNewModel"  ToolTip="Add New Model" BorderThickness="0"  Template="{StaticResource flatButton}"   Background="{x:Null}" Click="btAddNewModel_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="5,5,0,5" Grid.Column="4" >
+                    <Border  BorderBrush="#FF008BFF" BorderThickness="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5" Background="#0007212C" >
+                        <Image Source="modules.png" Margin="6,7"></Image>
+                    </Border>
+                </Button>
+
+
+                <Label Content="P:" Grid.Column="6" Grid.Row="0"   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontFamily="Calibri light" Margin="15,16,154,10" FontSize="18" />
+
+                <Border x:Name="bd"  BorderThickness="1" Grid.Column="6" Margin="15,15,5,10"  BorderBrush="#FF558AE6" CornerRadius="2" >
+                    <Label  x:Name="lb_Project"  HorizontalAlignment="Stretch"  Margin="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontFamily="Calibri light" FontSize="18" Grid.Column="14" Background="#01030C2B"  />
+                </Border>
+
+                <Label Content="M:" Grid.Column="7" Grid.Row="0" HorizontalAlignment="Stretch" Foreground="White"  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Calibri light" Margin="16,16,151,11" FontSize="18"  />
+
+                <Border x:Name="bd_Model" CornerRadius="2" BorderBrush="#FF558AE6" BorderThickness="1" Grid.Column="7"  Margin="15,15,5,10" >
+                    <Label  x:Name="lb_Model"  HorizontalAlignment="Stretch"  Margin="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontFamily="Calibri light" FontSize="18" Background="#00030C2B" />
+                </Border>
+
+                <Label Content="C:"   Grid.Column="8" Grid.Row="0" HorizontalAlignment="Stretch"    VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontFamily="Calibri light" Margin="16,16,150,10" FontSize="18" RenderTransformOrigin="-0.051,0.472" />
+
+                <Border x:Name="bdComponent" CornerRadius="2" BorderBrush="#FF558AE6" BorderThickness="1" Grid.Column="8" Margin="15,15,5,10"   >
+                    <Label  x:Name="lb_Component" HorizontalAlignment="Stretch"  Margin="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Foreground="Yellow" FontFamily="Calibri light" FontSize="18" Background="#00030C2B" />
+                </Border>
+
+
+
+                <ComboBox x:Name="cbbLoadModel" Grid.Column="9" Height="25" Margin="1,2,179,0" VerticalAlignment="Top"  DropDownClosed="cbbAddNewModel_DropDownClosed" Visibility="Hidden" Grid.ColumnSpan="2"  />
+                <Label Content="DAEYOUNG ELECTR      ICS VINA" Grid.ColumnSpan="3" Grid.Column="10" Height="60" Margin="23,0,0,0" VerticalAlignment="Top" FontFamily="Century Schoolbook" FontWeight="Bold"  FontSize="35" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Foreground="#FF0E90FD" Width="667" >
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.064"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.332"/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+
+                <Label Content="                                       ON" Grid.ColumnSpan="3" Grid.Column="10" Height="60" Margin="23,0,0,0" VerticalAlignment="Top" FontFamily="Century Schoolbook" FontWeight="Bold"  FontSize="35" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Foreground="#FFFFB900" Width="667" >
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.064"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.332"/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+
+
+            </Grid>
+
+            <Grid x:Name="GR_PROGRAM" Width="1920" Background="#E51C1F30" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,0,0,0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="dgrModelSteps"  PreviewKeyDown="DataGrid_PreviewKeyDown" CopyingRowClipboardContent="dgrModelSteps_CopyingRowClipboardContent"  Grid.Column="0" Margin="0,15,4,2" Grid.Row="2" Background="#BF090A31" AutoGenerateColumns="False" SelectionChanged="dgrModelSteps_SelectionChanged" Focusable="True" SelectedItem ="{Binding Index}"  FontFamily="Calibri"  CanUserAddRows="False"  >
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#FF020547"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="17"/>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="Height" Value="35" />
+                            <Setter Property="Foreground" Value="White"></Setter>
+
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.RowHeaderStyle    >
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background" Value="#0D2813"/>
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header = "P/M"  IsReadOnly="True"    Width="1*" Binding="{Binding PM}" CellStyle="{StaticResource VTMDataGridCellData}" >
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header = "Name"     Width="3*" Binding="{Binding Name}" CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "PCB"      Width="1*" Binding="{Binding PCB}" CellStyle="{StaticResource VTMDataGridCellData}"/>
+                        <DataGridTextColumn Header = "Function"  IsReadOnly="True"  Width="3*" Binding="{Binding FUNC}" CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "Skip "    Width="1*" Binding="{Binding Skip}"  CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "Set 1"    Width="1*" Binding="{Binding Set1}"  CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "Get 1 "  IsReadOnly="True"   Width="4.5*" Binding="{Binding Get1}"  CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "Set 2"    Width="1*" Binding="{Binding Set2}"  CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "Get 2 "  IsReadOnly="True"   Width="1*" Binding="{Binding Get2}"  CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "Set 3"    Width="1*" Binding="{Binding Set3}"  CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <DataGridTextColumn Header = "Set 4 "   Width="1*" Binding="{Binding Set4}"  CellStyle="{StaticResource VTMDataGridCellData}" />
+                        <!--<DataGridTextColumn Header = "Result "  Width="1.5*" Binding="{Binding Result}" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                <Grid Background="{TemplateBinding Background}">
+                                                    <ContentPresenter VerticalAlignment="Center" />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                    <Setter Property="FontSize" Value="16.5"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=ResutlTest}" Value="True">
+                                            <Setter Property="Background" Value="#FF41FF1A"/>
+
+
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=ResutlTest}" Value="False">
+                                            <Setter Property="Background" Value="#ae213d "/>
+                                            <Setter Property="Foreground" Value="White"/>
+
+
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+
+
+                        </DataGridTextColumn>-->
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Height="50" VerticalAlignment="Top" Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton x:Name="tgbtModel" Template="{StaticResource flatTogleButtonn}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="1" Foreground="White" FontSize="16" FontFamily="Calibri Light" BorderThickness="0" Background="{x:Null}" Click="tgbtModel_Click" Margin="0,0,5,0" >
+                        <Border  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"   BorderThickness="2" CornerRadius="5" Margin="1" Background="#7F000940" BorderBrush="#FF008BFF" >
+                            <Label x:Name="lbtgbtModel" Content="MODEL" HorizontalAlignment="Stretch"  Margin="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontSize="25" Foreground="White" FontFamily="CaBrili" FontWeight="Bold" Background="#FF00041B" />
+                        </Border>
+                    </ToggleButton>
+
+                    <ToggleButton x:Name="tgbProject" Template="{StaticResource flatTogleButtonn}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BorderBrush="White" Foreground="White" FontSize="16" FontFamily="Calibri Light" BorderThickness="0" Background="{x:Null}" Margin="0,0,0,0" Click="tgbProject_Click" >
+                        <Border HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" BorderBrush="#FF008BFF" BorderThickness="2" CornerRadius="5" Margin="1" Background="#7F000940" >
+                            <Label x:Name="lbtgbtProject" Content="PROJECT" HorizontalAlignment="Stretch"  Margin="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontSize="25" Foreground="White" FontFamily="CaBrili" FontWeight="Bold" Background="#FF00041B" />
+                        </Border>
+                    </ToggleButton>
+
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="415"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="355"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="355"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border BorderBrush="White" BorderThickness="1" Margin="0,1,0,1" >
+                        <Label Grid.Column="1" Grid.Row="1" Content="Project" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="calibri light">
+                            <Label.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF090038"/>
+                                    <GradientStop Color="#FF0C0635" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Background>
+                        </Label>
+                    </Border>
+
+                    <Border BorderBrush="White" BorderThickness="1" Margin="0,1,0,1" Grid.Column="2" >
+                        <Label Grid.Column="1" Grid.Row="1" Content=" Model code" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="calibri light">
+                            <Label.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF090038"/>
+                                    <GradientStop Color="#FF0C0635" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Background>
+                        </Label>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="1" Grid.Row="1" >
+                        <Label Grid.Column="1" Grid.Row="1" Content="Component" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="calibri light" >
+                            <Label.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF090038"/>
+                                    <GradientStop Color="#FF0C0635" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Background>
+                        </Label>
+                    </Border>
+
+                    <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" Grid.Row="1"  >
+                        <Label Grid.Column="1" Grid.Row="1" Content="PCB" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="calibri" >
+                            <Label.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF090038"/>
+                                    <GradientStop Color="#FF0C0635" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Background>
+                        </Label>
+                    </Border>
+
+                    <ComboBox x:Name="cbbAddNewProject"  Grid.Column="1" Foreground="Black" FontFamily="Calibri Light" FontSize="18" BorderBrush="White"  Margin="0,1,10,1" PreviewMouseDown="cbbAddNewProject_PreviewMouseDown" DropDownClosed="cbbAddNewProject_DropDownClosed"  >
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+
+
+
+                    <ComboBox x:Name="cbbAddNewModel" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="White" Grid.Column="3" Foreground="Black" FontFamily="Calibri Light" FontSize="18"   Margin="0,1,10,1"  DropDownClosed="cbbAddNewModel_DropDownClosed" AllowDrop="False"    >
+
+
+
+                    </ComboBox>
+                    <ComboBox x:Name="cbb_PCB"  AllowDrop="False"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Text="0" Grid.Column="3" Margin="0,0,10,0" Grid.Row="1" BorderBrush="White" FontFamily="Calibri Light" FontSize="18" DropDownClosed="cbb_PCB_DropDownClosed" >
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8"/>
+                    </ComboBox>
+
+
+                    <Border BorderBrush="White" BorderThickness="1"  Grid.Column="1"  Margin="0,0,10,0" Grid.Row="1" Background="White">
+                        <Label x:Name="tbComponent"  Margin="0" Foreground="Black" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  FontFamily="Calibri Light" FontSize="18" />
+                    </Border>
+
+                    <Border BorderBrush="White" BorderThickness="1" Grid.ColumnSpan="2"       Grid.Row="2" Margin="0,10,10,15"  >
+                        <Grid>
+                            <Image x:Name="ImageModel" Stretch="Uniform"  />
+                            <Grid x:Name="GR_Capacitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="{Binding ActualWidth, ElementName=ImageModel}" Height="{Binding ActualHeight, ElementName=ImageModel}" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label  Grid.Column="0" Grid.Row="0" BorderThickness="2" Margin="0" Content="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray" FontFamily="Calibri Light"  FontWeight="Bold"/>
+                                <Label  Grid.Column="1" Grid.Row="0" BorderThickness="2" Margin="0" Content="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray"  FontFamily="Calibri Light" FontWeight="Bold"/>
+                                <Label  Grid.Column="2" Grid.Row="0" BorderThickness="2" Margin="0" Content="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray"  FontFamily="Calibri Light" FontWeight="Bold" />
+                                <Label  Grid.Column="0" Grid.Row="1" BorderThickness="2" Margin="0" Content="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray"  FontFamily="Calibri Light" FontWeight="Bold" />
+                                <Label  Grid.Column="1" Grid.Row="1" BorderThickness="2" Margin="0" Content="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray" FontFamily="Calibri Light"  FontWeight="Bold"/>
+                                <Label  Grid.Column="2" Grid.Row="1" BorderThickness="2" Margin="0" Content="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray"  FontFamily="Calibri Light" FontWeight="Bold"/>
+                                <Label  Grid.Column="0" Grid.Row="2" BorderThickness="2" Margin="0" Content="7" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray" FontFamily="Calibri Light"  FontWeight="Bold"/>
+                                <Label  Grid.Column="1" Grid.Row="2" BorderThickness="2" Margin="0" Content="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray"  FontFamily="Calibri Light" FontWeight="Bold"/>
+                                <Label  Grid.Column="2" Grid.Row="2" BorderThickness="2" Margin="0" Content="9" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30" BorderBrush="Gray"  FontFamily="Calibri Light" FontWeight="Bold" />
+                            </Grid>
+
+                            <Canvas x:Name="ImageModelCanvas" Background="#01000000" MouseDown="ImageModelCanvas_MouseDown" MouseMove="ImageModelCanvas_MouseMove" MouseUp="ImageModelCanvas_MouseUp" KeyDown="ImageModelCanvas_KeyDown"
+                                    Width="{Binding ActualWidth, ElementName=ImageModel}" Height="{Binding ActualHeight, ElementName=ImageModel}" Grid.Column="1" Grid.Row="1" SizeChanged="ImageModelCanvas_SizeChanged"/>
+
+
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="2" Margin="0,10,10,15"  >
+                        <Grid Margin="0,0,0,0">
+                            <Image x:Name="ImageTest" Stretch="Uniform" />
+                            <Grid x:Name="GR_Capacitor_Result" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Width="{Binding ActualWidth, ElementName=ImageTest}" Height="{Binding ActualHeight, ElementName=ImageTest}" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label  Grid.Column="0" Grid.Row="0" BorderThickness="2" Margin="0" Content="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"   FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="1" Grid.Row="0" BorderThickness="2" Margin="0" Content="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"    FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="2" Grid.Row="0" BorderThickness="2" Margin="0" Content="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"    FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="0" Grid.Row="1" BorderThickness="2" Margin="0" Content="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"    FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="1" Grid.Row="1" BorderThickness="2" Margin="0" Content="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"    FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="2" Grid.Row="1" BorderThickness="2" Margin="0" Content="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"    FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="0" Grid.Row="2" BorderThickness="2" Margin="0" Content="7" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"    FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="1" Grid.Row="2" BorderThickness="2" Margin="0" Content="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"  FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                                <Label  Grid.Column="2" Grid.Row="2" BorderThickness="2" Margin="0" Content="9" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="OrangeRed" FontSize="30"  FontFamily="Calibri Light" BorderBrush="Gray"   FontWeight="Bold" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch"  Margin="0,0,0,19" Grid.Row="2" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="192"/>
+                        <RowDefinition Height="67"/>
+                        <RowDefinition Height="62*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="White" BorderThickness="2" Margin="0,5" Grid.Row="0" >
+                        <Label Grid.Column="1" Grid.Row="2" Content="Function" Margin="0,0,0,0" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="calibri light">
+                            <Label.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF090038"/>
+                                    <GradientStop Color="#FF0C0635" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Background>
+                        </Label>
+                    </Border>
+
+                    <ComboBox x:Name="cbb_Function" Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,5,5,5" Grid.Row="0" Foreground="Black" FontSize="18"  FontFamily="Calibri Light" BorderBrush="#FF170909" DropDownClosed="cbb_Function_DropDownClosed" >
+                        <ComboBoxItem Content="Matchtemplate"/>
+                        <ComboBoxItem Content="Polarized_Capacitors"/>
+                        <ComboBoxItem Content="Ceramic_Capacitors"/>
+                        <ComboBoxItem Content="Read_QR"/>
+
+                    </ComboBox>
+
+
+
+
+
+                    <Button x:Name="bt_Test" Template="{StaticResource flatButton}"  Grid.Column="4" Margin="0,5,20,5" BorderThickness="0" Background="{x:Null}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Click="bt_Test_Click"  >
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" CornerRadius="5" BorderThickness="2" BorderBrush="#FF0097FF" Grid.Column="3" >
+
+                            <Label Content="Test" HorizontalAlignment="Left" Height="46" Margin="32,-1,0,1" VerticalAlignment="Center" Width="110" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Cambria Math" FontSize="35" FontWeight="Bold" >
+                                <Label.Foreground>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF00E8FF" Offset="1"/>
+                                        <GradientStop Color="#FF00E8FF"/>
+                                    </LinearGradientBrush>
+                                </Label.Foreground>
+                            </Label>
+
+                        </Border>
+                    </Button>
+                    <Label Content="Function description" HorizontalAlignment="Center" BorderBrush="White" BorderThickness="1"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="75" Margin="0,5,191,0" Grid.Row="1" VerticalAlignment="Center" Width="193" FontSize="18"  FontFamily="Dubai Light" Foreground="White" Grid.ColumnSpan="2"/>
+
+                    <Border x:Name="bdReadQR" BorderBrush="White" Visibility="Hidden"  BorderThickness="1" Grid.ColumnSpan="5" Height="174" Margin="0,10,20,0" Grid.Row="2" VerticalAlignment="Top"   >
+                        <Grid HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="83*"/>
+                                <RowDefinition Height="89*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="179*"/>
+                                <ColumnDefinition Width="383*"/>
+                                <ColumnDefinition Width="386*"/>
+                            </Grid.ColumnDefinitions>
+
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="bdParameterMatchTemplate"  Visibility="Hidden" BorderBrush="White" BorderThickness="1" Grid.ColumnSpan="5" Height="174" Margin="0,10,20,0" Grid.Row="2" VerticalAlignment="Top"  >
+                        <Grid HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="83*"/>
+                                <RowDefinition Height="89*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="179*"/>
+                                <ColumnDefinition Width="383*"/>
+                                <ColumnDefinition Width="386*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Similarity threshold"  FontSize="18" Foreground="White" Margin="18,21,369,23" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="tb_Threasold" Text="0.75" Grid.Column="1" Margin="55,15,253,18" Foreground="black" FontSize="25"  FontFamily="Calibri" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontWeight="Bold" Background="White" />
+                            <Label Content="Threshold setting must be less than 1."  FontSize="18" Foreground="White" Margin="20,19,42,31" Grid.ColumnSpan="2" Grid.Row="1"/>
+                            <!--<Label Content="Số lượng đối tượng"  FontSize="18" Foreground="White" Margin="6,14,5,42" Grid.Row="1"/>-->
+                            <!--<TextBox Grid.Column="1" Grid.Row="1" Margin="8,15,301,29" FontSize="18" Foreground="black"   FontFamily="Calibri" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontWeight="Bold"/>-->
+                            <!--<CheckBox Grid.Column="2" Content="Xác định nhiều đối tượng" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  VerticalAlignment="Center" Height="37" Margin="0"  Width="242" Foreground="White" FontSize="20"  FontFamily="Calibri Light" FontWeight="Bold"/>-->
+
+                        </Grid>
+                    </Border>
+
+
+                    <Border x:Name="bdParameterPolarized_Capacitors"  Visibility="Hidden" BorderBrush="White" BorderThickness="1" Grid.ColumnSpan="5" Height="174" Margin="0,10,20,0" Grid.Row="2" VerticalAlignment="Top" d1:IsHidden="True"  >
+                        <Grid HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="83*"/>
+                                <RowDefinition Height="89*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="179*"/>
+                                <ColumnDefinition Width="383*"/>
+                                <ColumnDefinition Width="386*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Pole position"  FontSize="18" Foreground="White" Margin="18,21,27,23"/>
+                            <Label x:Name="lbpolarization" Grid.Column="1" BorderBrush="White" BorderThickness="1" Margin="0,15,303,20" Foreground="White" FontSize="25"  FontFamily="Calibri" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontWeight="Bold" />
+
+                        </Grid>
+                    </Border>
+                    <Border x:Name="bdParameterCeramicCapacitors"  Visibility="Hidden" BorderBrush="White" BorderThickness="1" Grid.ColumnSpan="5" Height="174" Margin="0,10,20,0" Grid.Row="2" VerticalAlignment="Top"  >
+                        <Grid HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="137"/>
+                                <ColumnDefinition Width="400"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="99*"/>
+                                <ColumnDefinition Width="98*"/>
+                                <ColumnDefinition Width="98*"/>
+                                <ColumnDefinition Width="98*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Low color threshold"  FontSize="14" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            <Label Content="High color threshold"  FontSize="14" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="2" Margin="0,0,0,-0.5"/>
+                            <Slider x:Name="Sd_NguongTren" Grid.Column="1"  Grid.Row="2"              VerticalAlignment="Center" Minimum= "0" Maximum="180" Value="0" Interval="100" LargeChange="10" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" Height="18" Margin="0,21,0,18.5"/>
+                            <Slider x:Name="Sd_NguongDuoi" Grid.Column="1"   VerticalAlignment="Center" Minimum="0" Maximum="180" Value="0" Interval="100" Grid.ColumnSpan="1" SmallChange="1"  TickFrequency="1" IsSnapToTickEnabled="True" Height="18" Margin="0,20,0,19"  />
+                            <Image Grid.Column="1" Source="image/Capture.PNG" Grid.Row="1" />
+
+                            <Label x:Name="lbNguongTren"      BorderBrush="White" BorderThickness="1"                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Foreground="White" Margin="3,5,0,3.5"   Grid.Row="2"              Grid.Column="2"    Content ="{Binding Value, ElementName=Sd_NguongTren, Mode=TwoWay}" />
+                            <Label x:Name="lbNguongDuoi"    BorderBrush="White" BorderThickness="1"                                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Foreground="White" Margin="2,5,0,5" Grid.Row="0"   Grid.Column="2"   Content ="{Binding Value, ElementName=Sd_NguongDuoi, Mode=TwoWay}"/>
+                            <Label Grid.Column="3" Content="Percent in the selected threshold"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Grid.ColumnSpan="4" Margin="27,0,0,0" />
+                            <Label Grid.Column="3" Content="Set threshold for average color value"                        HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="28,1,58,22" Grid.ColumnSpan="4" Grid.Row="1" />
+
+                            <Label x:Name="lbThreasoldColor" BorderBrush="White" Foreground="White" BorderThickness="1" Grid.Column="6" Content="0" Margin="14,6,18,4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"  />
+
+                            <xc:DoubleUpDown  Text="0"    x:Name="tbThreasoldColorTop" Grid.Column="4" HorizontalContentAlignment="Center"   Foreground="Black"             FontSize="18" Margin="81,2,35,6" Grid.Row="2"   Maximum="100" Minimum="0" Grid.ColumnSpan="2" />
+                            <xc:DoubleUpDown  Text="0"   x:Name="tbThreasoldColorBottom" Grid.Column="3" HorizontalContentAlignment="Center" Foreground="Black"             FontSize="18" Margin="64,3,52,4" Grid.Row="2"  Maximum="{Binding Value, ElementName=tbThreasoldColorTop}" Minimum="0" Grid.ColumnSpan="2"/>
+                            <Label Grid.Column="3" Content="Bottom" HorizontalContentAlignment="Left"  Foreground="White" Margin="63,25,47,55" Grid.Row="1" FontSize="15" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                            <Label Grid.Column="5" Content="Top" HorizontalContentAlignment="Left"  Foreground="White" Margin="8,25,36,2" Grid.Row="1" FontSize="15" RenderTransformOrigin="0.25,0.3" />
+                            <!--<Button x:Name="Set" Grid.Column="6" Grid.Row="2" Margin="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  BorderThickness="0" Background="{x:Null}" Click="Set_Click" >
+                                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" CornerRadius="5" BorderThickness="1"  >
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FF020610" Offset="0.059"/>
+                                            <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                            <GradientStop Color="#FF204398" Offset="0.441"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Label Content="SET" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontFamily="Calibri Light" FontSize="18" />
+                                </Border>
+                            </Button>-->
+
+                        </Grid>
+                    </Border>
+
+
+                    <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch"  Margin="0,5,22,0" Grid.Row="1" VerticalAlignment="Stretch">
+                        <Label x:Name="lb_Motathuattoan" FontFamily="Dubai Light" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="18"  Margin="0,0,4,0" Foreground="White" >
+                        </Label>
+                    </Border>
+
+                    <Label x:Name="lbTime" Content="Time" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" FontFamily="Calibri Light" FontSize="20" Margin="0,44,7,-15" FontWeight="Bold" Grid.Row="4" HorizontalAlignment="Right" Width="239" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+                        <Label.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00DC5A" Offset="1"/>
+                                <GradientStop Color="White"/>
+                                <GradientStop Color="#FFB0FFD0" Offset="0.41"/>
+                            </LinearGradientBrush>
+                        </Label.Foreground>
+                    </Label>
+                    <Border CornerRadius="2" BorderThickness="1" BorderBrush="#FF0097FF"  Grid.Column="3" HorizontalAlignment="Left" Height="48" Margin="24,6,0,0" VerticalAlignment="Top" Width="146">
+                        <CheckBox x:Name="cbSkip" Grid.Column="3" Content="   Skip" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="25"  Foreground="#FFB0FFD0" Height="38" Width="115" FontFamily="Cambria Math" Click="cbSkip_Click" Margin="15,3,14,5"  />
+                    </Border>
+                    <!--<Label x:Name="lbnote" Content="Thao tác tạo project mới: Tạo tên và tải hình ảnh -&gt; Tạo component mới. &#xA;Thao tác tạo model mới: Chọn project chứa model -&gt; Tạo tên và tải hình ảnh -&gt; Thực hiện lưu model 2 lần -&gt; Tạo component mới. &#xA;## Khi tạo component mới trong Model: Chọn project -> Chọn model -&gt; Thực hiện lưu model 2 lần -&gt; Tạo component mới trong model đó. " BorderThickness="1" BorderBrush="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontFamily="Dubai Light" FontSize="16" Foreground="White" Margin="0,0,20,40" Grid.ColumnSpan="5" Grid.Row="3" HorizontalAlignment="Stretch" Grid.RowSpan="2" FontStyle="Italic"  />-->
+                </Grid>
+                <Grid HorizontalAlignment="Stretch"  Margin="0,55,5,0" Grid.RowSpan="2" VerticalAlignment="Stretch"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"  />
+                        <RowDefinition Height="1*"  />
+                    </Grid.RowDefinitions>
+                    <Image x:Name="Image1" Grid.ColumnSpan="2" Grid.RowSpan="2"  Margin="0" Grid.Row="0" Grid.Column="0" Stretch="Fill" Source="{Binding Source, ElementName=Camera1_Image}"/>
+                    <Canvas x:Name="Image1_Canvas" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0" Grid.Row="0" Grid.Column="0" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Border x:Name="bdAddNewModel" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center"  BorderBrush="White" Background="#FF061623" BorderThickness="2"  Margin="700,400,700,300" Height="285" Width="490">
+            <Grid  x:Name="GR_AddProjectandModel" Grid.Column="4" Margin="0,0,0,0" Grid.ColumnSpan="2"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="64*"/>
+                    <RowDefinition Height="123*"/>
+                    <RowDefinition Height="94*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="486"/>
+                </Grid.ColumnDefinitions>
+
+                <!--<Button x:Name="btOpenNewModelPage" BorderThickness="0" Background="{x:Null}" Click="btOpenNewModelPage_Click"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  >
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF020610" Offset="0.059"/>
+                                    <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                    <GradientStop Color="#FF204398" Offset="0.441"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Label Content="Add New Project" FontFamily="Calibri" FontSize="15" Foreground="White"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" >
+
+                            </Label>
+                        </Border>
+                    </Button>-->
+
+                <Label Content="New Model" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"  FontFamily="Batang"  FontSize="30" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" >
+                    <Label.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FF00FFF3" Offset="1"/>
+                            <GradientStop Color="#FF8EFFF4" Offset="0.443"/>
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                </Label>
+
+                <Button  x:Name="btAddNewModell"  Visibility="Hidden" ToolTip="Add New Model" BorderThickness="0"    Background="{x:Null}"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,3,425,4" Grid.RowSpan="3" >
+                    <Border BorderBrush="White"  BorderThickness="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5" >
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="Black"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Image Source="modules.png" Margin="6,7"></Image>
+                    </Border>
+                </Button>
+
+
+                <TextBox x:Name="tbAddNewModel" Text=""   Background="White" BorderThickness="1"  FontWeight="Bold"  FontFamily="calibri" Foreground="Black" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="25,39,28,27" Grid.Row="1" RenderTransformOrigin="0.5,0.5" >
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.308"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+
+                <Button x:Name="btOK" Grid.Row="2" Template="{StaticResource flatButton}"  Click="btOK_Model_Click" BorderThickness="0" Margin="17,17,263,27" Background= "{x:Null}" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="50" >
+                    <Border BorderBrush="White"  BorderThickness="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5" >
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="Black"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Label Content="OK" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"   />
+                    </Border>
+                </Button>
+
+                <Button x:Name="btCancell"  Margin="244,16,26,28"  Grid.Row="2" Template="{StaticResource flatButton}"  BorderThickness="0"  Background= "{x:Null}" Click="btCancel_Click" >
+                    <Border BorderBrush="White"  BorderThickness="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5" >
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="Black"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Label Content="Cancel" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"   />
+                    </Border>
+                </Button>
+
+                <!--<Border BorderBrush="White"  BorderThickness="1" HorizontalAlignment="Stretch" Margin="244,16,26,28" Grid.Row="2" VerticalAlignment="Center" Height="50" CornerRadius="5">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF020610" Offset="0.059"/>
+                            <GradientStop Color="#FF05194C" Offset="0.921"/>
+                            <GradientStop Color="#FF204398" Offset="0.441"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    -->
+                <!--<Button x:Name="btCancelll"  Content="Cancel" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="{x:Null}" BorderThickness="0" FontFamily="Calibri" FontSize="20" FontWeight="Bold"  Foreground="white"/>-->
+                <!--
+                </Border>-->
+            </Grid>
+
+
+
+        </Border>
+
+
+        <Border x:Name="bd_NewProject" HorizontalAlignment="Center" VerticalAlignment="Center"  BorderBrush="White" Background="#FF061623" BorderThickness="2"  Margin="750,360,750,300" Visibility="Hidden"  >
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+
+                </Grid.ColumnDefinitions>
+                <Label Content="New Project Setting" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"  FontFamily="Batang"  FontSize="20" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" >
+                    <Label.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FF00FFF3" Offset="1"/>
+                            <GradientStop Color="#FF8EFFF4" Offset="0.443"/>
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                </Label>
+
+                <Label Content="Số PBA (Number of PBA)" Margin="5,5,5,0" VerticalAlignment="Top"  FontFamily="calibri light" Foreground="#FFA3D8D8" Grid.Row="2"  FontSize="17"/>
+                <Label Content="Độ dài QR ( QR Lenght) " Margin="5,5,5,0" VerticalAlignment="Top"  FontFamily="calibri light" Foreground="#FFA3D8D8" Grid.Row="3"  FontSize="17" />
+                <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Margin="50,0,50,0" Grid.Row="1" >
+
+                    <TextBox x:Name="tbNewProjectSetting"   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  FontFamily="calibri" Foreground="Black" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                </Border>
+                <ComboBox x:Name="cbbNumberPBA" Grid.Column="1" HorizontalAlignment="Stretch"  Margin="5,5,10,5" Grid.Row="2" VerticalAlignment="Stretch" SelectedIndex="0" FontFamily="calibri" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                    <ComboBoxItem Content="7"/>
+                    <ComboBoxItem Content="8"/>
+
+                </ComboBox>
+                <TextBox x:Name="tbQRLenght"  Grid.Column="1" HorizontalAlignment="Stretch"  Margin="5,5,11,5" Grid.Row="3" VerticalAlignment="Stretch" Text="23" FontFamily="calibri" FontSize="25" HorizontalContentAlignment="Center" />
+
+
+
+                <Button x:Name="btCancel" Grid.Row="4" Template="{StaticResource flatButton}" Grid.Column="1"  BorderThickness="0"  Background= "{x:Null}" Click="btCancel_Click" Height="50" Margin="10"  >
+                    <Border BorderBrush="White"  BorderThickness="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5" >
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="Black"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Label Content="Cancel" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"   />
+                    </Border>
+                </Button>
+
+                <Button x:Name="bt_NewProjectSetting" Grid.Row="4" Template="{StaticResource flatButton}" Grid.Column="0"  BorderThickness="0" Click="bt_OK_Project_Click" Background= "{x:Null}"  Height="50" Margin="10"  >
+                    <Border BorderBrush="White"  BorderThickness="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5" >
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF05194C" Offset="0.921"/>
+                                <GradientStop Color="Black"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Label Content="OK" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"   />
+                    </Border>
+                </Button>
+
+
+                <!--<Border   BorderBrush="White"  BorderThickness="1" HorizontalAlignment="Stretch" Margin="10" Grid.Row="4" VerticalAlignment="Center" Height="50" CornerRadius="5" >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF020610" Offset="0.059"/>
+                            <GradientStop Color="#FF05194C" Offset="0.921"/>
+                            <GradientStop Color="#FF204398" Offset="0.441"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Button x:Name="bt_NewProjectSetting" Content="OK" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="{x:Null}" BorderThickness="0" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Click="bt_OK_Project_Click" Foreground="white"/>
+                </Border>
+                
+                
+                
+                <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Stretch" Margin="10" Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Height="50" CornerRadius="5">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF020610" Offset="0.059"/>
+                            <GradientStop Color="#FF05194C" Offset="0.921"/>
+                            <GradientStop Color="#FF204398" Offset="0.441"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="{x:Null}" BorderThickness="0" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Click="btCancel_Click" Foreground="white"/>
+                </Border>-->
+
+
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
